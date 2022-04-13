@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+
 import { useNavigate, useLocation } from 'react-router-dom';
 import queryString from 'query-string'
 
 import { useForm } from '../hooks/useForm';
 import { buscarEmpleados } from '../helpers/buscarempleados';
+import { useEffect, useState } from 'react';
 
 export const Busquedas = () => {
 
@@ -17,6 +18,8 @@ export const Busquedas = () => {
         
     });
 
+    const [datos, setDatos] = useState([]);
+    
     const { searchText } = formValues;
 
     //const heroesFileted = useMemo( () => getHeroesByName(q), [q] );
@@ -25,26 +28,30 @@ export const Busquedas = () => {
     const handleSearch = (e) => {
         e.preventDefault();
         navigate(`?q=${ searchText }&buscar=buscar`)
+        setDatos(null);
     }
 
-    let empleados = [];
-    let resultado = [];
-    if (q && buscar)
-    {   
-        if (q.length > 4)
-        {
-            empleados = buscarEmpleados(q)
-            .then(empleados  => {
-                console.log(empleados);
-                //console.log(`Obtenido el resultado final: ${empleados}`);
+       
+           useEffect( () => {
+            let empleados = buscarEmpleados(q)
+            .then(empleado  => {
+                //console.log("empleado => ",empleado);                
+                setDatos(empleado);
             });
 
+           }, []);
+           
             
+
+          //  const empleados2 = await buscarEmpleados(q);
             buscar='';
-        }
+       
 
-    }
-
+    
+    //console.log("esto vale chingados", datos);
+    let {empleados : arregloEmpleados} = datos;
+    console.log("esto vale ahora",arregloEmpleados);
+    
 
     return (
         <>
@@ -93,8 +100,8 @@ export const Busquedas = () => {
                     }
 
                     {
-                        (empleados)
-                        ?  `tiene el valor de ${empleados.length} `
+                        (arregloEmpleados)
+                        ?  `tiene el valor de ${arregloEmpleados.length} `
                         : `sin datos`
 
 
