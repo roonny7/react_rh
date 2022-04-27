@@ -4,14 +4,16 @@ import queryString from 'query-string'
 
 import { useForm } from '../hooks/useForm';
 import { buscarEmpleados } from '../helpers/buscarempleados';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 export const Busquedas = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    let { q = '', buscar='' } = queryString.parse(location.search);
+    let { q = '',  } = queryString.parse(location.search);
     
     const [ formValues, handleInputChange ] = useForm({
         searchText: q,
@@ -29,30 +31,45 @@ export const Busquedas = () => {
         e.preventDefault();
         navigate(`?q=${ searchText }&buscar=buscar`)
         setDatos(null);
+        //console.log("q vale : ", q);
+
+        buscarEmpleados(searchText)
+        .then(empleado  => {
+            //console.log("empleado => ",empleado);                
+            setDatos(empleado);
+        });
+
     }
 
-       
-           useEffect( () => {
-            let empleados = buscarEmpleados(q)
-            .then(empleado  => {
-                //console.log("empleado => ",empleado);                
-                setDatos(empleado);
-            });
+    /*useEffect( () => {
+        let empleados = buscarEmpleados(q)
+        .then(empleado  => {
+            console.log("empleado => ",empleado);                
+            setDatos(empleado);
+        });
 
-           }, []);
+       }, []);
+      */     
            
             
 
           //  const empleados2 = await buscarEmpleados(q);
-            buscar='';
+            
        
 
     
-    //console.log("esto vale chingados", datos);
-    let {empleados : arregloEmpleados} = datos;
-    console.log("esto vale ahora",arregloEmpleados);
-    
+    //console.log("esto vale del set state", datos);
+    let arrayempleados = [];
+    if (datos){
+        arrayempleados=datos.empleados; 
+       
+    }
 
+       // console.log("array empleados = ", arrayempleados);
+    //let {empleados : arregloEmpleados} = datos;
+    //console.log("esto vale ahora",arregloEmpleados);
+    
+       
     return (
         <>
             <h1>Búsquedas</h1>
@@ -94,14 +111,24 @@ export const Busquedas = () => {
 
                     {
                         
-                        (q === '')                        
+                        (!arrayempleados)                        
                             ? <div className="alert alert-danger"> Buscar </div>
-                            : <div className="alert alert-danger"> No hay resultados: { q } </div>
+                            : <div className="alert alert-danger"> Hay en total { arrayempleados.length} </div>
                     }
 
                     {
-                        (arregloEmpleados)
-                        ?  `tiene el valor de ${arregloEmpleados.length} `
+                        (arrayempleados)
+                        ?  arrayempleados.map( empleado =>(
+                             
+                             
+                             <li key={empleado.NoEmpleado}>
+                                 <Link className="link-primary" to={`/empleado/?noempleado=${empleado.NoEmpleado}&seleccionar=1`}>
+                                     seleccionar 
+                                </Link> =&gt;
+                                 {empleado.Nombre} {empleado.APaterno} {empleado.AMaterno}</li>                             
+                           
+                             
+                        ))
                         : `sin datos`
 
 
