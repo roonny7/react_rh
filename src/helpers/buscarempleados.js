@@ -1,6 +1,6 @@
 export const buscarEmpleados = async( nombre ) => {
 
-    const url = `http://localho.st:4000/api/empleados?nombre=${ encodeURI( nombre ) }`;
+    const url = `http://10.9.15.20:4000/api/empleados?nombre=${ encodeURI( nombre ) }`;
     const resp = await fetch( url );
     const  data  = await resp.json();
     //console.log("buscarempleados => tiene valor de : ", data);
@@ -20,7 +20,7 @@ export const buscarEmpleados = async( nombre ) => {
 
 export const buscarEmpleadosId = async( NoEmpleado ) => {
 
-    const url = `http://localho.st:4000/api/empleados/${NoEmpleado}`;
+    const url = `http://10.9.15.20:4000/api/empleados/${NoEmpleado}`;
     const resp = await fetch( url );
     const  data  = await resp.json();
     console.log("buscarempleados => tiene valor de : ", data);
@@ -28,4 +28,13 @@ export const buscarEmpleadosId = async( NoEmpleado ) => {
     return data;
 
 
+}
+
+export const buscarHistorial = async( NoEmpleado ) => {
+
+    const url = `http://10.9.15.20:4000/api/historial/`;
+    const resp = await fetch( url );
+    const  data  = await resp.json();
+    //console.log("buscarempleados => tiene valor de : ", data);
+    return data;
 }

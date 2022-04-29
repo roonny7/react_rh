@@ -3,6 +3,7 @@ import { MenuChingadaMadre } from '../components/menu';
 import { DetalleEmpleado } from '../components/DetalleEmpleado'
 import { PaginaPrincipal } from '../components/PaginaPrincipal';
 import { Busquedas } from '../components/buscar';
+import { Historial } from '../components/Historial';
 
 
 export const DashboardRoutes = () => {
@@ -14,6 +15,7 @@ export const DashboardRoutes = () => {
                 <Routes>
                     <Route path="/buscar" element={<Busquedas />} />
                     <Route path="/empleado" element={<DetalleEmpleado />} />
+                    <Route path="/historial" element={<Historial />} />
                     <Route path="/" element={<PaginaPrincipal />} />
 
                 </Routes>

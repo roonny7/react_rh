@@ -7,7 +7,6 @@ export const DetalleEmpleado = ( props ) => {
     const location = useLocation();
     let { noempleado='', seleccionar=''} = queryString.parse(location.search);
     const [empleado, setEmpleados] = useState([]);
-    let datosEmpleado = '';
     
     if (seleccionar)
         localStorage.setItem("noempleado", noempleado);
@@ -15,35 +14,64 @@ export const DetalleEmpleado = ( props ) => {
 
     
     useEffect( () => {
-        datosEmpleado = await buscarEmpleadosId(noempleado)
-        .then(empleado  => {
-            setEmpleados(empleado);
-        });
-    }, [empleado]);
+       buscarEmpleadosId(noempleado)
+       .then(empleado  => {
+            //console.log(empleado);
+            setEmpleados(empleado)
+       });
+    }, [noempleado]);
 
 
+    console.log("empleados tiene", empleado);
+    let datosEmpleado = empleado.empleados; 
+    let rowEmpleado='', descripcion='', tipoEmpleado;
+    
+
+
+    if (datosEmpleado)
+    {
+        rowEmpleado=datosEmpleado[0];
+        
+    }
+    else    
+      {  rowEmpleado = { APaterno : '', AMaterno : ''}
+      }
+    
+    let { APaterno='', AMaterno='', Nombre='' , Dependencia='', Puesto='', CURP='', RFC='', Nivele:Nivel, TiposEmpleado='' } = rowEmpleado;
+    (Dependencia) ? descripcion = Dependencia.Descripcion : descripcion='-';
+    (Nivel) ? Nivel = Nivel.Nivel : Nivel='-';
+    (TiposEmpleado) ? tipoEmpleado=TiposEmpleado.Descripcion : tipoEmpleado='';
+
+    let foto = "/"+noempleado+".jpg";
+    console.log(foto);
     
     
-    console.log(empleado);
+    
     return (
         <>
             <h1>Datos del empleado<br/><br/></h1>
             
             <div className="row">
-                <div className="col-md-5">
-                    <div className="card" style={{width: "18rem;"}}>
+                <div className="col-md-7">
+                    <div className="card" style={{width: "18rem"}}>
                         <div align="center">
-                            <img src="/empleado.png" className="card-img-top" alt="..."  style={{width : "205px"}}/>
+                            <img src={foto} alt="Foto" onError={({ currentTarget}) => {
+                                currentTarget.onerror=null;
+                                currentTarget.src="/empleado.png";
+
+                            }} style={{width: "200px"}}
+                            />
+
                         </div>
                         <div className="card-body">
-                            <h4 className="card-title">Roonny Cristhoper Ruiz Ramirez</h4>
-                            <h5 className="card-title">Secretaría de finanzas y planeacion</h5>
-                            <p className="card-text">Analista Profesional</p>
+                            <h4 className="card-title">{APaterno} {AMaterno} {Nombre}</h4>
+                            <h5 className="card-title">{descripcion}</h5>
+                            <p className="card-text">{ Puesto }</p>
                         </div>
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Nivel 700</li>
-                            <li className="list-group-item">RURR8012 - RUURR8012HQRZM</li>
-                            <li className="list-group-item">CONFIANZA</li>
+                            <li className="list-group-item">Nivel { Nivel }</li>
+                            <li className="list-group-item">{RFC} - {CURP}</li>
+                            <li className="list-group-item">{ tipoEmpleado }</li>
                         </ul>
                         <div className="card-body">
                             <a href="/historial" className="card-link">Historial </a>

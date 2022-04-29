@@ -28,7 +28,7 @@ export const MenuChingadaMadre = () => {
 
                     <NavLink 
                         className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') }
-                        to="/historialLaboral"
+                        to="/historial"
                     >
                         Historial laboral
                     </NavLink>
