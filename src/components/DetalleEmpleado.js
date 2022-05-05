@@ -11,6 +11,13 @@ export const DetalleEmpleado = ( props ) => {
     if (seleccionar)
         localStorage.setItem("noempleado", noempleado);
     
+    noempleado = localStorage.getItem("noempleado");
+
+    if (noempleado==16909) localStorage.setItem("nombre", "Inche lupita gomita");
+    if (noempleado==28519) localStorage.setItem("nombre", "William");
+    if (noempleado==4493) localStorage.setItem("nombre", "Pelusa del mal");
+    if (noempleado==14455) localStorage.setItem("nombre", "Roonny");
+    
 
     
     useEffect( () => {

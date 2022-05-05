@@ -4,6 +4,7 @@ import { DetalleEmpleado } from '../components/DetalleEmpleado'
 import { PaginaPrincipal } from '../components/PaginaPrincipal';
 import { Busquedas } from '../components/buscar';
 import { Historial } from '../components/Historial';
+import { Movimientos } from '../components/Movimientos';
 
 
 export const DashboardRoutes = () => {
@@ -16,6 +17,7 @@ export const DashboardRoutes = () => {
                     <Route path="/buscar" element={<Busquedas />} />
                     <Route path="/empleado" element={<DetalleEmpleado />} />
                     <Route path="/historial" element={<Historial />} />
+                    <Route path="/movimientos" element={<Movimientos />} />
                     <Route path="/" element={<PaginaPrincipal />} />
 
                 </Routes>

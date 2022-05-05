@@ -4,6 +4,8 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 export const MenuChingadaMadre = () => {
 
+    const noEmpleado = localStorage.getItem("noempleado");
+    const Nombre = localStorage.getItem("nombre");
     const navigate = useNavigate();
 
     const handleBuscar = () => {
@@ -45,6 +47,9 @@ export const MenuChingadaMadre = () => {
                         Expediente laboral
                     </NavLink>
 
+                    <NavLink className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') } to="/explaboral" >
+                        Finiquito
+                    </NavLink>
                     
                 </div>
             </div>
@@ -52,7 +57,7 @@ export const MenuChingadaMadre = () => {
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
                 <ul className="navbar-nav ml-auto">
                     <span className="nav-item nav-link text-info">
-                        Empleado actual
+                        Empleado actual : { noEmpleado} - { Nombre}
                     </span>
                     
                     <button 
