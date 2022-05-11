@@ -39,15 +39,15 @@ export const MenuChingadaMadre = () => {
                         Movimientos
                     </NavLink>
 
-                    <NavLink className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') } to="/exppersonal" >
+                    <NavLink className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') } to="/expedienteper" >
                         Expediente personal
                     </NavLink>
 
-                    <NavLink className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') } to="/explaboral" >
+                    <NavLink className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') } to="/expedientelab" >
                         Expediente laboral
                     </NavLink>
 
-                    <NavLink className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') } to="/explaboral" >
+                    <NavLink className={ ({ isActive }) => 'nav-item nav-link ' + (isActive ? 'active' : '') } to="/finiquito" >
                         Finiquito
                     </NavLink>
                     

@@ -47,3 +47,12 @@ export const buscarMovimientos = async( NoEmpleado ) => {
     //console.log("data tiene este valor ",nuevoRegreso);
     return nuevoRegreso;
 }
+
+export const buscarExpedientes = async( NoEmpleado, tipo ) => {
+
+    const url = `http://10.9.15.20:4000/api/expedientes/${NoEmpleado}/${tipo}`;
+    const resp = await fetch( url );
+    const  { nuevoRegreso }  = await resp.json();  
+    //console.log("data tiene este valor ",nuevoRegreso);
+    return nuevoRegreso;
+}
