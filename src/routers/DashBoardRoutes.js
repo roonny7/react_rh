@@ -14,7 +14,7 @@ export const DashboardRoutes = () => {
         <>
             <MenuChingadaMadre />
 
-            <div className="container">
+            <div className="container2" style={{"marginLeft" : "25px"}}>
                 <Routes>
                     <Route path="/buscar" element={<Busquedas />} />
                     <Route path="/empleado" element={<DetalleEmpleado />} />

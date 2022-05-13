@@ -56,3 +56,22 @@ export const buscarExpedientes = async( NoEmpleado, tipo ) => {
     //console.log("data tiene este valor ",nuevoRegreso);
     return nuevoRegreso;
 }
+
+export const generarFiniquito = async( formValues ) => {
+    console.log(formValues);
+    const url = `http://10.9.15.20:4000/api/finiquitos/`;
+    const resp = await fetch( url , 
+        { 
+            method : "POST",
+            headers: {
+                'Content-type': 'application/json',                
+            },
+            body : JSON.stringify(formValues)
+        });
+    
+    
+    
+    const  { Resultado }  = await resp.json();  
+    //console.log("data tiene este valor ",nuevoRegreso);
+    return Resultado;
+}
