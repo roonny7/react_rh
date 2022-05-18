@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { buscarEmpleadosId,  buscarExpedientes } from "../helpers/buscarempleados";
+import {   buscarExpedientes } from "../helpers/buscarempleados";
+import { IncludeEmpleado } from "./IncludeEmpleado";
 
 export const Expedientes = ( {tipo} ) => {
    
-    console.log(tipo);
+    //console.log(tipo);
     //obtenemos el número de empleado que está en el localStorage
     const noEmpleado = localStorage.getItem("noempleado");
     
     ///////////////////////////////////////////////////////////////////////////////
-    const [empleado, setEmpleados] = useState([]);
+    
     let [expedientes, setExpedientes] = useState([]);
     
-    useEffect( () => {
-        buscarEmpleadosId(noEmpleado)
-        .then(empleado  => {
-             //console.log(empleado);
-             setEmpleados(empleado)
-        });
-     }, [noEmpleado]);
-
-     let datosEmpleado = empleado.empleados; 
-     let rowEmpleado='';     
-     
-
-     if (datosEmpleado) rowEmpleado=datosEmpleado[0];
-     else {  rowEmpleado = { APaterno : '', AMaterno : ''} }
-     
-     let { APaterno='', AMaterno='', Nombre=''  } = rowEmpleado;
+    
+    
 
      //////////////////////////////////////////////////////////////////////////////////
 
@@ -46,7 +33,7 @@ export const Expedientes = ( {tipo} ) => {
    return (
         <>
             <h2> Expediente { (tipo === 2 ) ? "personal" : "laboral" }</h2>
-            <h3>{ noEmpleado} - { APaterno } { AMaterno}  {Nombre}</h3>
+            <IncludeEmpleado />
             <br></br>
             <table width="100%" className="table table-bordered table-hover table-stripped">
                 <thead>

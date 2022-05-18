@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { buscarEmpleadosId,  buscarMovimientos } from "../helpers/buscarempleados";
+import { IncludeEmpleado } from "./IncludeEmpleado";
 
 export const Movimientos = ( props ) => {
 
@@ -19,13 +20,14 @@ export const Movimientos = ( props ) => {
      }, [noEmpleado]);
 
      let datosEmpleado = empleado.empleados; 
-     let rowEmpleado='';     
+     let rowEmpleado;     
+     console.log(rowEmpleado);
      
 
      if (datosEmpleado) rowEmpleado=datosEmpleado[0];
      else {  rowEmpleado = { APaterno : '', AMaterno : ''} }
      
-     let { APaterno='', AMaterno='', Nombre=''  } = rowEmpleado;
+ 
 
      //////////////////////////////////////////////////////////////////////////////////
 
@@ -42,14 +44,13 @@ export const Movimientos = ( props ) => {
      let posiciones = movimientos.length;
      let movimientosmenos1=movimientos.slice(0,(posiciones-1))
      
-     console.log(movimientos, movimientosmenos1);
-     console.log("¿es un array ?", Array.isArray(movimientos));
+     
      
     
    return (
         <>
             <h2> Movimientos </h2>
-            <h3>{ noEmpleado} - { APaterno } { AMaterno}  {Nombre}</h3>
+            <IncludeEmpleado />
             <br></br>
             <table width="100%" className="table table-bordered table-hover table-stripped">
                 <thead>
@@ -93,7 +94,7 @@ export const Movimientos = ( props ) => {
            {   
                (movimientos[movimientos.length-1])
                ? <h3> Antigüedad total : {movimientos[movimientos.length-1].antiguedadTotal}</h3>
-               : <h3></h3>
+               : <h3>null</h3>
 
            } 
         </>

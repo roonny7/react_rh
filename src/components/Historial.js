@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { buscarEmpleadosId, buscarHistorial } from "../helpers/buscarempleados";
+import {  buscarHistorial } from "../helpers/buscarempleados";
+import { IncludeEmpleado } from "./IncludeEmpleado";
+
 
 export const Historial = ( props ) => {
 
@@ -7,25 +9,18 @@ export const Historial = ( props ) => {
     const noEmpleado = localStorage.getItem("noempleado");
     
     ///////////////////////////////////////////////////////////////////////////////
-    const [empleado, setEmpleados] = useState([]);
+    const [empleado] = useState([]);
     let [historial, setHistorial] = useState([]);
     
-    useEffect( () => {
-        buscarEmpleadosId(noEmpleado)
-        .then(empleado  => {
-             //console.log(empleado);
-             setEmpleados(empleado)
-        });
-     }, [noEmpleado]);
-
+    
      let datosEmpleado = empleado.empleados; 
-     let rowEmpleado='';     
+     let rowEmpleado=''; 
+     console.log(rowEmpleado);    
      
 
      if (datosEmpleado) rowEmpleado=datosEmpleado[0];
      else {  rowEmpleado = { APaterno : '', AMaterno : ''} }
-     
-     let { APaterno='', AMaterno='', Nombre=''  } = rowEmpleado;
+          
 
      //////////////////////////////////////////////////////////////////////////////////
 
@@ -50,15 +45,8 @@ export const Historial = ( props ) => {
     }
     
     let resHistorial_Array = [];
-    resHistorial_Array = []
-    //historial  = JSON.stringify(historial);
-     
+    resHistorial_Array = [];    
     
-    console.log("historial vale: ", historial);
-    let esArreglo = Array.isArray(historial);
-    console.log("¿es arreglo ? ", esArreglo);
-    console.log(typeof historial);
-
     let i, y;
     for(i in historial){
             for (y in historial[i]){
@@ -66,25 +54,10 @@ export const Historial = ( props ) => {
             }
        }
     
-     console.log("al final", resHistorial_Array, "¿y es un array? ", Array.isArray(resHistorial_Array));  
-
-
-
-
-
-     //console.log("row empleado",rowEmpleado); 
-     //console.log("antes ", resHistorial);
-     //resHistorial = Object.entries(resHistorial);
-     //console.log("despues", resHistorial[0]);
-     //let rowHistorial = resHistorial[0];
-     //rowHistorial = rowHistorial;
-    // console.log(rowHistorial);
-
-
    return (
         <>
             <h2> Historial </h2>
-            <h3>{ noEmpleado} - { APaterno } { AMaterno}  {Nombre}</h3>
+            <IncludeEmpleado />                        
             <table width="100%" className="table table-bordered table-hover table-stripped">
                 <thead>
                     <tr>
